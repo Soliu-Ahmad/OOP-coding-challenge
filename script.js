@@ -19,15 +19,16 @@ class Car1 {
         this.speed = speed;
     }
 
+    // methods
 
     accelerate() {
-        const acc = this.speed + 10;
-        console.log('For ' + this.make + ' ' + ' Accelerate increase by ' + acc);
+        this.speed += 10;
+        console.log(`${this.make} is going at ${this.speed} km/h`)
     }
 
     break() {
-        const br = this.speed - 5;
-        console.log('For ' + this.make + ' Break Decrease by ' + br)
+        this.speed -= 5;
+        console.log((`${this.make} is going at ${this.speed} km/h`))
     }
 }
 
@@ -39,20 +40,58 @@ class Car2 {
 
 
     accelerate() {
-        const acc = this.speed + 10;
-        console.log('For ' + this.make + " " + " Accelerate increase by " + acc);
+        this.speed += 10;
+        console.log(`${this.make} is going at ${this.speed} km/h`)
     }
 
     break() {
-        const br = this.speed - 5;
-        console.log('For ' + this.make + ' Break Decrease by ' + br)
+        this.speed -= 5;
+        console.log((`${this.make} is going at ${this.speed} km/h`))
+    }
+
+    get getSpeedUS() {
+        return `${this.speed / 1.6} mi/h`;
+    }
+
+    set setSpeedUS(newSpeed) {
+        return `${newSpeed * 1.6} mi/h`;
     }
 }
 
 const myCar1 = new Car1('BMW', 120);
-myCar1.accelerate();
-myCar1.break();
+// myCar1.accelerate();
+// myCar1.accelerate();
+// myCar1.accelerate();
+// myCar1.break();
+// myCar1.accelerate();
+// myCar1.accelerate();
+// myCar1.break();
 
-const myCar2 = new Car2('Mecedes', 95);
-myCar2.accelerate();
-myCar2.break();
+
+// const myCar2 = new Car2('Mecedes', 95);
+// myCar2.accelerate();
+// myCar2.accelerate();
+// myCar2.accelerate();
+// myCar2.break();
+// myCar1.break();
+// myCar2.accelerate();
+
+console.log(myCar1.getSpeedUS);
+myCar1.setSpeedUS = 140;
+console.log(myCar1);
+
+// CHALLENGE 2
+/***
+ * 1. create class for account
+ * 2. parameters: owner, pin, movement
+ * 3. then with three (3) methods.
+ */
+
+class Account {
+    constructor(owner, pin,) {
+        this.owner = owner;
+        this.pin = pin;
+        this.movement = [];
+    }
+
+} 
