@@ -59,39 +59,199 @@ class Car2 {
 }
 
 const myCar1 = new Car1('BMW', 120);
-// myCar1.accelerate();
-// myCar1.accelerate();
-// myCar1.accelerate();
-// myCar1.break();
-// myCar1.accelerate();
-// myCar1.accelerate();
-// myCar1.break();
+myCar1.accelerate();
+myCar1.accelerate();
+myCar1.accelerate();
+myCar1.break();
+myCar1.accelerate();
+myCar1.accelerate();
+myCar1.break();
 
 
-// const myCar2 = new Car2('Mecedes', 95);
-// myCar2.accelerate();
-// myCar2.accelerate();
-// myCar2.accelerate();
-// myCar2.break();
-// myCar1.break();
-// myCar2.accelerate();
+const myCar2 = new Car2('Mecedes', 95);
+myCar2.accelerate();
+myCar2.accelerate();
+myCar2.accelerate();
+myCar2.break();
+myCar1.break();
+myCar2.accelerate();
 
 console.log(myCar1.getSpeedUS);
 myCar1.setSpeedUS = 140;
 console.log(myCar1);
 
+const Car = function (make, speed) {
+    this.make = make;
+    this.speed = speed;
+}
+
+const bmw = new Car('BMW', 120)
+console.log(bmw);
+
+const SUV = function (make, speed, charge) {
+    Car.call(this, make, speed);
+    this.charge = charge;
+}
+
+SUV.prototype.chargeBattery = function (chargeTo) {
+    this.charge = chargeTo;
+}
+
+SUV.prototype.accelerate = function () {
+    this.speed = this.speed + 20;
+    this.charge = this.charge - 2;
+
+    console.log(`${this.make} is goint at ${this.speed} with the battery percentage at ${this.charge}%`)
+}
+
+const bmwSUV = new SUV('BMW SUV', 140, 46);
+console.log(bmwSUV)
+bmwSUV.accelerate()
+bmwSUV.accelerate()
+bmwSUV.accelerate()
+bmwSUV.accelerate()
+
+/**
+ * ASSIGNMENT
+ * 1. Convert the code above (Function Constructor) to ES6 Class
+ * 2. Create another instance of volvoSUV with speed of 130 at charge of 58%
+ * 3. Write *brake* method in ES6 👇
+ *      a. Speed will reduce by 10
+ *      b. Charge will increase by 1
+ * 4. Chain these two methods together to see the battery charge percentages
+ * 
+ * HINT: Don't forget to return *this* from each method...😏
+ * 
+ * You are FREE to create as many additional instances to the two above as you wish.
+ * 
+ * Goodluck 🍀
+ */
+
+class Motor extends Car {
+    constructor(make, speed, charge) {
+        super(make, speed)
+        this.charge = charge;
+    }
+
+    // methods
+
+    break() {
+        this.speed -= 10;
+        this.charge += 1
+        console.log((`${this.make} is going at ${this.speed} with the battery percentage at ${this.charge}%`))
+    }
+
+}
+
+const myMotor1 = new Motor('VOLVO SUV', 130, 58);
+console.log(myMotor1);
+myMotor1.break();
+myMotor1.break();
+myMotor1.break();
+myMotor1.break();
+myMotor1.break();
+
+class Suv extends Car {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    // methods
+
+    break() {
+        this.make += 20
+        this.speed -= 2
+        console.log(`${this.make} is going at ${this.speed} with the battery percentage at ${this.charge}%`);
+    }
+
+}
+const mySuv = new Motor('SUV BMW', 140, 46);
+console.log(mySuv);
+mySuv.break();
+mySuv.break();
+mySuv.break();
+mySuv.break();
+mySuv.break();
+
+
+
+
 // CHALLENGE 2
 /***
  * 1. create class for account
  * 2. parameters: owner, pin, movement
- * 3. then with three (3) methods.
+ * 3. then with three (3) methods. 
  */
 
 class Account {
-    constructor(owner, pin,) {
+    // 1. Public fields
+    lacale = navigator.language;
+    // 2. private fields
+    #movements = [];
+    #pin
+
+    constructor(owner, currency, pin,) {
         this.owner = owner;
-        this.pin = pin;
-        this.movement = [];
+        this.currency = currency;
+        this.#pin = pin;
+
+
+        console.log(`thanks for banking with us ${this.owner}`)
     }
 
-} 
+    // 3. public method
+    createUsername() {
+        return this.owner.toUpperCase().split('').slice(0, 2).join('');
+    }
+
+    deposit(value) {
+        this.#movements.push(value);
+        return this;
+    }
+
+    withdraw(value) {
+        // return this.movements.push(-value);
+        this.deposit(-value);
+        return this;
+    }
+    // 4. private method
+    #approvedLoan() {
+        return true;
+    }
+
+    requestLoan(value) {
+
+        if (this.#approvedLoan()) {
+            console.log('loan approved')
+            return this.deposit(value)
+        } else {
+            console.log('get out here!')
+        }
+
+        return this;
+    }
+
+    get getBalance() {
+        return this.#movements.reduce((accum, el) => el + accum, 0)
+    }
+
+    get getMovements() {
+        return this.#movements
+    }
+}
+const acct1 = new Account('micheal', 'USD', 1111);
+console.log(acct1.createUsername());
+acct1.deposit(500)
+    .deposit(1000)
+    .deposit(800)
+    .withdraw(200)
+    .deposit(2000)
+    .withdraw(350)
+    .withdraw(280)
+    .deposit(400)
+    .requestLoan(10000);
+// console.log(acct1.#movements);
+console.log(acct1.getMovements);
+console.log(acct1.getBalance);
+console.log(acct1);
