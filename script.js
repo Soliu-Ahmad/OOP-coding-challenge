@@ -80,101 +80,6 @@ console.log(myCar1.getSpeedUS);
 myCar1.setSpeedUS = 140;
 console.log(myCar1);
 
-const Car = function (make, speed) {
-    this.make = make;
-    this.speed = speed;
-}
-
-const bmw = new Car('BMW', 120)
-console.log(bmw);
-
-const SUV = function (make, speed, charge) {
-    Car.call(this, make, speed);
-    this.charge = charge;
-}
-
-SUV.prototype.chargeBattery = function (chargeTo) {
-    this.charge = chargeTo;
-}
-
-SUV.prototype.accelerate = function () {
-    this.speed = this.speed + 20;
-    this.charge = this.charge - 2;
-
-    console.log(`${this.make} is goint at ${this.speed} with the battery percentage at ${this.charge}%`)
-}
-
-const bmwSUV = new SUV('BMW SUV', 140, 46);
-console.log(bmwSUV)
-bmwSUV.accelerate()
-bmwSUV.accelerate()
-bmwSUV.accelerate()
-bmwSUV.accelerate()
-
-/**
- * ASSIGNMENT
- * 1. Convert the code above (Function Constructor) to ES6 Class
- * 2. Create another instance of volvoSUV with speed of 130 at charge of 58%
- * 3. Write *brake* method in ES6 👇
- *      a. Speed will reduce by 10
- *      b. Charge will increase by 1
- * 4. Chain these two methods together to see the battery charge percentages
- * 
- * HINT: Don't forget to return *this* from each method...😏
- * 
- * You are FREE to create as many additional instances to the two above as you wish.
- * 
- * Goodluck 🍀
- */
-
-class Motor extends Car {
-    constructor(make, speed, charge) {
-        super(make, speed)
-        this.charge = charge;
-    }
-
-    // methods
-
-    break() {
-        this.speed -= 10;
-        this.charge += 1
-        console.log((`${this.make} is going at ${this.speed} with the battery percentage at ${this.charge}%`))
-    }
-
-}
-
-const myMotor1 = new Motor('VOLVO SUV', 130, 58);
-console.log(myMotor1);
-myMotor1.break();
-myMotor1.break();
-myMotor1.break();
-myMotor1.break();
-myMotor1.break();
-
-class Suv extends Car {
-    constructor(make, speed) {
-        this.make = make;
-        this.speed = speed;
-    }
-
-    // methods
-
-    break() {
-        this.make += 20
-        this.speed -= 2
-        console.log(`${this.make} is going at ${this.speed} with the battery percentage at ${this.charge}%`);
-    }
-
-}
-const mySuv = new Motor('SUV BMW', 140, 46);
-console.log(mySuv);
-mySuv.break();
-mySuv.break();
-mySuv.break();
-mySuv.break();
-mySuv.break();
-
-
 
 
 // CHALLENGE 2
@@ -255,3 +160,120 @@ acct1.deposit(500)
 console.log(acct1.getMovements);
 console.log(acct1.getBalance);
 console.log(acct1);
+
+const Car = function (make, speed) {
+    this.make = make;
+    this.speed = speed;
+}
+
+const bmw = new Car('BMW', 120)
+console.log(bmw);
+
+const SUV = function (make, speed, charge) {
+    Car.call(this, make, speed);
+    this.charge = charge;
+}
+
+SUV.prototype.chargeBattery = function (chargeTo) {
+    this.charge = chargeTo;
+}
+
+SUV.prototype.accelerate = function () {
+    this.speed = this.speed + 20;
+    this.charge = this.charge - 2;
+
+    console.log(`${this.make} is goint at ${this.speed} with the battery percentage at ${this.charge}%`)
+}
+
+const bmwSUV = new SUV('BMW SUV', 140, 46);
+console.log(bmwSUV)
+bmwSUV.accelerate()
+bmwSUV.accelerate()
+bmwSUV.accelerate()
+bmwSUV.accelerate()
+
+/**
+ * ASSIGNMENT
+ * 1. Convert the code above (Function Constructor) to ES6 Class
+ * 2. Create another instance of volvoSUV with speed of 130 at charge of 58%
+ * 3. Write *brake* method in ES6 👇
+ *      a. Speed will reduce by 10
+ *      b. Charge will increase by 1
+ * 4. Chain these two methods together to see the battery charge percentages
+ * 
+ * HINT: Don't forget to return *this* from each method...😏
+ * 
+ * You are FREE to create as many additional instances to the two above as you wish.
+ * 
+ * Goodluck 🍀
+ */
+
+// No 1.
+
+
+class Suv extends Car {
+    constructor(make, speed, charge) {
+        super(make, speed)
+        this.charge = charge;
+    }
+
+    accelerate() {
+        this.speed += 20;
+        this.charge -= 2;
+
+        console.log(`${this.make} is going at ${this.speed} with the battery percentage at ${this.charge}%`)
+    }
+
+    break() {
+        this.speed -= 10;
+        this.charge += 1;
+
+        console.log(`${this.make} is going at ${this.speed} with the battery percentage at ${this.charge}%`)
+    }
+}
+
+const bmwSuv1 = new Suv('BMW', 140, 46);
+console.log(bmwSuv1);
+bmwSuv1.accelerate();
+bmwSuv1.accelerate();
+bmwSuv1.accelerate();
+bmwSuv1.break();
+bmwSuv1.break();
+bmwSuv1.break();
+
+const volvoSuv = new Suv('volvo Suv', 130, 58);
+console.log(volvoSuv);
+volvoSuv.break();
+volvoSuv.break();
+volvoSuv.break();
+volvoSuv.accelerate();
+volvoSuv.accelerate();
+volvoSuv.accelerate();
+volvoSuv.accelerate();
+
+
+// No 2.
+
+class Motor extends Car {
+    constructor(make, speed, charge) {
+        super(make, speed)
+        this.charge = charge;
+    }
+
+    // methods
+
+    break() {
+        this.speed -= 10;
+        this.charge += 1
+        console.log((`${this.make} is going at ${this.speed} with the battery percentage at ${this.charge}%`))
+    }
+
+}
+
+const myMotor1 = new Motor('VOLVO SUV', 130, 58);
+console.log(myMotor1);
+myMotor1.break();
+myMotor1.break();
+myMotor1.break();
+myMotor1.break();
+myMotor1.break();
